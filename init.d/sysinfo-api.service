@@ -1,0 +1,11 @@
+[Unit]
+Description=Sysinfo API working on port 26171, source /opt/sysinfo-api
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/sysinfo-api/sysinfo_api
+Restart=always
+
+[Install]
+WantedBy=default.target
