@@ -16,6 +16,19 @@ This project is designed to operate as a service on Linux systems and retrieve s
 ```
 
 make
+make install
 
+# or just work
+
+make
+./sysinfo_api
 
 ```
+
+### Working Port
+
+working port is 26171.
+
+`http://ip_address:26171/`
+
+
