@@ -4,6 +4,8 @@
 
 This project is designed to operate as a service on Linux systems and retrieve system information through various endpoints from a specific port.
 
+![](pictures/service.png)
+
 ## Using 
 
 ### Requirements
@@ -27,7 +29,7 @@ make
 
 ## easy install
 wget https://raw.githubusercontent.com/QueryVS/sysinfo-api/refs/heads/main/scripts/install-all-server.sh
-./install-all-server.sh
+./install-all-server.sh prod
 ```
 
 ### Working Port
@@ -39,5 +41,11 @@ wget https://raw.githubusercontent.com/QueryVS/sysinfo-api/refs/heads/main/scrip
    - endpoints : http://ip_address:26171/diskinfo
 
 
+## HTTP Response
+![](pictures/cpuinfo.png)
 
+![](pictures/meminfo.png)
 
+![](pictures/diskinfo.png)
+
+---
