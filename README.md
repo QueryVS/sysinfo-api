@@ -10,6 +10,7 @@ This project is designed to operate as a service on Linux systems and retrieve s
 
  - gcc
  - make
+ - systemd
 
 ### Execute and Install
 
@@ -18,17 +19,25 @@ This project is designed to operate as a service on Linux systems and retrieve s
 make
 make install
 
-# or just work
+## or just work
 
 make
 ./sysinfo_api
 
+
+## easy install
+wget https://raw.githubusercontent.com/QueryVS/sysinfo-api/refs/heads/main/scripts/install-all-server.sh
+./install-all-server.sh
 ```
 
 ### Working Port
 
-working port is 26171.
+ - default port :: 26171
+ - address : http://ip_address:26171/
+   - endpoints : http://ip_address:26171/cpuinfo
+   - endpoints : http://ip_address:26171/meminfo
+   - endpoints : http://ip_address:26171/diskinfo
 
-`http://ip_address:26171/`
+
 
 
