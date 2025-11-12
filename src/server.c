@@ -1,30 +1,26 @@
-#include "server.h"
-#include "http_parser.h"
-#include "router.h"
-#include <stdio.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
+//
+/* (C) 2024 Author QueryVS
+ * create tcp socket, get accept data and read, call parse function, send response 
+ * 
+ */
 
-#define PORT 26171
-#define BUFFER_SIZE 8096
+#include "server.h"
 
 void start_server() {
-    int server_fd, new_socket;
+    int socket_tcp; // for creating tcp socket
+    int http_accept; // accept http data from socket_tcp
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[BUFFER_SIZE] = {0};
 
-    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
-        perror("Socket başarısız");
+    if ((socket_tcp = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        perror("socket creating failed");
         exit(EXIT_FAILURE);
     }
 
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        perror("Setsockopt başarısız");
+    if (setsockopt(socket_tcp, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+        perror("Setsockopt failed");
         exit(EXIT_FAILURE);
     }
 
@@ -32,20 +28,20 @@ void start_server() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
 
-    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0) {
-        perror("Bind başarısız");
+    if (bind(socket_tcp, (struct sockaddr *)&address, sizeof(address))<0) {
+        perror("Bind failed");
         exit(EXIT_FAILURE);
     }
-    if (listen(server_fd, 3) < 0) {
-        perror("Listen başarısız");
+    if (listen(socket_tcp, 3) < 0) {
+        perror("Listen failed");
         exit(EXIT_FAILURE);
     }
-    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0) {
-        perror("Accept başarısız");
+    if ((http_accept = accept(socket_tcp, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0) {
+        perror("Accept failed");
         exit(EXIT_FAILURE);
     }
 
-    read(new_socket, buffer, BUFFER_SIZE);
+    read(http_accept, buffer, BUFFER_SIZE);
     HttpRequest request;
     HttpResponse response;
     parse_request(buffer, &request);
@@ -54,9 +50,9 @@ void start_server() {
     char response_buffer[BUFFER_SIZE];
     build_response(&response, response_buffer);
 
-    write(new_socket, response_buffer, strlen(response_buffer));
+    write(http_accept, response_buffer, strlen(response_buffer));
 
     free_request(&request);
-    close(new_socket);
-    close(server_fd);
+    close(http_accept);
+    close(socket_tcp);
 }

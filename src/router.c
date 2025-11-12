@@ -1,6 +1,8 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+//
+/* (C) 2024 Author QueryVS
+ * route http api endpoints and call metric functions
+ * 
+ */
 
 #include "router.h"
 

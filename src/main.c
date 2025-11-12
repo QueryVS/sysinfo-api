@@ -1,3 +1,8 @@
+//
+/* (C) 2024 Author QueryVS
+ *  
+ */
+
 #include <stdio.h>
 #include "server.h"
 

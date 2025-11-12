@@ -1,6 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+//
+/* (C) 2024 Author QueryVS
+ * read proc file metric and write buffer
+ * 
+ */
 
 #include "system_info.h"
 
@@ -9,7 +11,7 @@ static char* file_read(const char* file_path) {
     if (file == NULL) {
         char *error = malloc(30);
         if (error) {
-            strcpy(error, "Dosya okunamadı.");
+            strcpy(error, "Don't read metric file.");
         }
         return error;
     }

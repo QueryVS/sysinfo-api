@@ -2,6 +2,14 @@
 #define HTTP_PARSER_H
 
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_METHOD_LEN 8
+#define MAX_URI_LEN 128
+#define MAX_HTTP_VERSION_LEN 16
+
 
 typedef struct {
     char* method;

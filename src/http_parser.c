@@ -1,11 +1,11 @@
-#include "http_parser.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+//
+/* (C) 2024 Author QueryVS
+ * 
+ * http parser methods
+ * 
+ */
 
-#define MAX_METHOD_LEN 8
-#define MAX_URI_LEN 128
-#define MAX_HTTP_VERSION_LEN 16
+#include "http_parser.h"
 
 void parse_request(const char *raw_request, HttpRequest *request) {
     // http parser
